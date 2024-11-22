@@ -1,5 +1,5 @@
 # Retro_Game_DataBase
-Banco de Dados Relacional de Retro Games, criado como modelo Avaliativo da Disciplina de (Banco de Dados) da Turma G91135 (Desenvolvedor de Sistemas) SENAI FSA dos alunos: Tiago Carneiro do Nascimento e Gabrielde Souza Oliveira.
+Banco de Dados Relacional de Retro Games, criado como modelo Avaliativo da Disciplina de (Banco de Dados) da Turma G91135 (Desenvolvedor de Sistemas) SENAI FSA dos alunos: Tiago Carneiro do Nascimento e Gabriel de Souza Oliveira.
 
 Objetivo: Realizar a modelagem completa de um banco de dados para um sistema de sua escolha (Nintendo Entertainment System, escolha dos criadores) de acordo com os critérios abaixo.
 
