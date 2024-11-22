@@ -126,3 +126,49 @@ END$$
 
 DELIMITER ;
 
+
+
+DELIMITER $$
+
+
+CREATE FUNCTION TotalVendasPorDesenvolvedor(dev_id INT) 
+RETURNS INT
+READS SQL DATA
+BEGIN
+    DECLARE total INT;
+    SELECT IFNULL(SUM(numero_vendas), 0) INTO total 
+    FROM Jogo
+    WHERE id_desenvolvedor = dev_id;
+    RETURN total;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE FUNCTION TotalJogosPorGenero(genre_id INT) 
+RETURNS INT
+READS SQL DATA
+BEGIN
+    DECLARE total INT;
+    SELECT IFNULL(COUNT(*), 0) INTO total 
+    FROM Jogo_Genero
+    WHERE id_genero = genre_id;
+    RETURN total;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE FUNCTION JogoMaisVendido() 
+RETURNS VARCHAR(100)
+READS SQL DATA
+BEGIN
+    DECLARE jogo_nome VARCHAR(100);
+    SELECT nome INTO jogo_nome 
+    FROM Jogo
+    ORDER BY numero_vendas DESC 
+    LIMIT 1;
+    RETURN jogo_nome;
+END $$
+DELIMITER ;
+
