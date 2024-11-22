@@ -228,3 +228,81 @@ END $$
 DELIMITER ;
 
 
+
+CREATE VIEW JogosPopulares AS
+SELECT nome, numero_vendas 
+FROM Jogo
+WHERE numero_vendas > 1000000;
+
+
+CREATE VIEW JogosPorDesenvolvedor AS
+SELECT nome, ano_lancamento, numero_vendas
+FROM Jogo
+WHERE id_desenvolvedor = 1;
+
+
+CREATE VIEW JogosPorAno AS
+SELECT nome, ano_lancamento, numero_vendas
+FROM Jogo
+WHERE ano_lancamento = 1985;
+
+
+CREATE VIEW JogosPorDesenvolvedorCount AS
+SELECT id_desenvolvedor, COUNT(*) AS num_jogos
+FROM Jogo
+GROUP BY id_desenvolvedor;
+
+
+CREATE VIEW TotalVendasPorDesenvolvedor AS
+SELECT id_desenvolvedor, SUM(numero_vendas) AS total_vendas
+FROM Jogo
+GROUP BY nome;
+
+
+
+
+CREATE VIEW TotalVendasPorDesenvolvedor AS
+SELECT 
+    d.id_desenvolvedor,
+    d.nome,
+    COUNT(j.id_jogo) AS total_jogos,          -- Contagem do número de jogos do desenvolvedor
+    SUM(j.numero_vendas) AS total_vendas,     -- Soma do número de vendas
+    AVG(j.numero_vendas) AS media_vendas,     -- Média de vendas por jogo
+    MIN(j.data_lancamento) AS primeiro_lancamento,  -- Data do primeiro jogo lançado pelo desenvolvedor
+    MAX(j.data_lancamento) AS ultimo_lancamento   -- Data do último jogo lançado pelo desenvolvedor
+FROM 
+	jogo j
+JOIN 
+    desenvolvedor d ON j.id_desenvolvedor = d.id_desenvolvedor  -- Junção com a tabela Desenvolvedores
+GROUP BY 
+    d.id_desenvolvedor, d.nome;   -- Agrupando pelo id e nome do desenvolvedor
+
+
+
+CREATE VIEW JogosPorGenero AS
+SELECT Jogo.nome, Genero.nome AS genero
+FROM Jogo
+INNER JOIN Jogo_Genero ON Jogo.id_jogo = Jogo_Genero.id_jogo
+INNER JOIN Genero ON Jogo_Genero.id_genero = Genero.id_genero;
+
+
+CREATE VIEW DesenvolvedoresComMaisJogos AS
+SELECT id_desenvolvedor, COUNT(*) AS num_jogos
+FROM Jogo
+GROUP BY id_desenvolvedor
+HAVING COUNT(*) > 5;
+
+
+CREATE VIEW JogoMaisVendido AS
+SELECT nome, numero_vendas
+FROM Jogo
+ORDER BY numero_vendas DESC
+LIMIT 1;
+
+
+CREATE VIEW JogosDetalhadosPorConsole AS
+SELECT Jogo.nome, Console.nome AS console, Jogo.numero_vendas, Jogo.data_lancamento
+FROM Jogo
+INNER JOIN Console ON id_jogo = Console.id_console;
+
+SELECT * FROM JogosDetalhadosPorConsole;
