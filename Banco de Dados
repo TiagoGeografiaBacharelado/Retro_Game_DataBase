@@ -172,3 +172,59 @@ BEGIN
 END $$
 DELIMITER ;
 
+
+DELIMITER $$
+CREATE TRIGGER PreventDeleteHighSellingGames
+BEFORE DELETE ON Jogo
+FOR EACH ROW
+BEGIN
+    IF OLD.numero_vendas > 1000000 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Não é permitido excluir jogos com mais de 1 milhão de vendas';
+    END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER UpdateTotalVendasAfterInsert
+AFTER INSERT ON Jogo
+FOR EACH ROW
+BEGIN
+    UPDATE Desenvolvedor
+    SET total_vendas = total_vendas + NEW.numero_vendas
+    WHERE id_desenvolvedor = NEW.id_desenvolvedor;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER AuditJogoNameChange
+AFTER UPDATE ON Jogo
+FOR EACH ROW
+BEGIN
+    INSERT INTO AuditLog (action, table_name, old_value, new_value, change_time)
+    VALUES ('UPDATE', 'Jogo', OLD.nome, NEW.nome, NOW());
+END $$
+
+
+CREATE TRIGGER UpdateGenreCountAfterInsert
+AFTER INSERT ON Jogo_Genero
+FOR EACH ROW
+BEGIN
+    UPDATE Genero
+    SET total_jogos = total_jogos + 1
+    WHERE id_genero = NEW.id_genero;
+END $$
+
+
+CREATE TRIGGER LogDeleteJogo
+AFTER DELETE ON Jogo
+FOR EACH ROW
+BEGIN
+    INSERT INTO AuditLog (action, table_name, old_value, change_time)
+    VALUES ('DELETE', 'Jogo', OLD.nome, NOW());
+END $$
+
+
+DELIMITER ;
+
+
