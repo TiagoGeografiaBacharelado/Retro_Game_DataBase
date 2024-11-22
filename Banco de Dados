@@ -93,3 +93,36 @@ INSERT INTO Jogo_Genero (id_jogo, id_genero) VALUES
 INSERT INTO Jogo_Console (id_jogo, id_console) VALUES 
 (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), 
 (6, 1), (7, 1), (8, 1), (9, 1), (10, 1);
+
+
+DELIMITER $$
+
+
+CREATE PROCEDURE GetJogosPorDesenvolvedor(IN dev_id INT)
+BEGIN
+    SELECT nome, ano_lancamento, numero_vendas 
+    FROM Jogo
+    WHERE id_desenvolvedor = dev_id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE AtualizarVendasJogo(IN jogo_nome VARCHAR(100), IN novas_vendas INT)
+BEGIN
+    UPDATE Jogo 
+    SET numero_vendas = novas_vendas 
+    WHERE nome = jogo_nome;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE DeletarJogo(IN jogo_nome VARCHAR(100))
+BEGIN
+    DELETE FROM Jogo WHERE nome = jogo_nome;
+END$$
+
+
+DELIMITER ;
+
