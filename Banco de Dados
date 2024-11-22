@@ -1,0 +1,29 @@
+CREATE DATABASE retro_game_database;
+USE retro_game_database;
+
+CREATE TABLE Desenvolvedor (
+    id_desenvolvedor INT PRIMARY KEY AUTO_INCREMENT, 
+    nome VARCHAR(100) NOT NULL                       
+);
+
+CREATE TABLE Genero (
+    id_genero INT PRIMARY KEY AUTO_INCREMENT,       
+    nome VARCHAR(50) NOT NULL                       
+);
+
+CREATE TABLE Console (
+    id_console INT PRIMARY KEY AUTO_INCREMENT,      
+    nome VARCHAR(50) NOT NULL                       
+);
+
+CREATE TABLE Jogo (
+    id_jogo INT PRIMARY KEY AUTO_INCREMENT,         
+    nome VARCHAR(100) NOT NULL,                     
+    ano_lancamento INT,                              
+    data_lancamento DATE,                            
+    numero_vendas INT,                               
+    id_desenvolvedor INT,                            
+    id_genero INT,                                  
+    FOREIGN KEY (id_desenvolvedor) REFERENCES Desenvolvedor(id_desenvolvedor), 
+    FOREIGN KEY (id_genero) REFERENCES Genero(id_genero)
+);
