@@ -27,3 +27,69 @@ CREATE TABLE Jogo (
     FOREIGN KEY (id_desenvolvedor) REFERENCES Desenvolvedor(id_desenvolvedor), 
     FOREIGN KEY (id_genero) REFERENCES Genero(id_genero)
 );
+
+INSERT INTO Desenvolvedor (id_desenvolvedor, nome) 
+VALUES (1, 'Nintendo'), 
+       (2, 'Capcom'), 
+       (3, 'Konami'), 
+       (4, 'Square Enix'), 
+       (5, 'Enix'), 
+       (6, 'Tecmo'), 
+       (7, 'HAL Laboratory'), 
+       (8, 'Technos Japan'), 
+       (9, 'Taito'), 
+       (10, 'Sunsoft'), 
+       (11, 'Rare'), 
+       (12, 'Hudson Soft');
+
+
+INSERT INTO Genero (nome) VALUES
+('Ação'), ('RPG'), ('Plataforma'), ('Aventura'), ('Corrida'),
+('Esporte'), ('Arcade'), ('Tiro'), ('Estratégia'), ('Luta'),
+('Quebra-cabeça'), ('Simulação'), ('Ritmo'), ('Beat\'em up'),
+('Point-And-Click');
+
+
+INSERT INTO Console (nome) VALUES ('NES');
+
+
+INSERT INTO Jogo (nome, ano_lancamento, data_lancamento, numero_vendas, id_desenvolvedor, id_genero) VALUES
+('Super Mario Bros.', 1985, '1985-09-13', 40000000, 1, 3),
+('The Legend of Zelda', 1986, '1986-02-21', 6700000, 1, 2),
+('Metroid', 1986, '1986-08-06', 2700000, 1, 4),
+('Mega Man 2', 1988, '1988-12-24', 1500000, 2, 1),
+('Castlevania', 1986, '1986-09-26', 2000000, 3, 5),
+('Final Fantasy', 1987, '1987-12-18', 2000000, 4, 2),
+('Dragon Quest', 1986, '1986-05-27', 1500000, 5, 2),
+('Contra', 1987, '1987-02-20', 1200000, 3, 1),
+('Ninja Gaiden', 1988, '1988-12-09', 1400000, 6, 1),
+('Excitebike', 1984, '1984-11-30', 1500000, 1, 6),
+('Kirby’s Adventure', 1993, '1993-03-23', 1900000, 7, 3),
+('Punch-Out!!', 1987, '1987-09-18', 2000000, 1, 7),
+('Duck Hunt', 1984, '1984-04-21', 2800000, 1, 8),
+('Double Dragon', 1987, '1987-06-20', 1800000, 8, 1),
+('Ice Climber', 1985, '1985-01-30', 1500000, 1, 3),
+('Bubble Bobble', 1986, '1986-08-01', 2000000, 9, 5),
+('Donkey Kong', 1981, '1981-07-09', 5000000, 1, 5),
+('Balloon Fight', 1985, '1985-01-22', 1200000, 1, 9),
+('Gradius', 1985, '1985-05-29', 1000000, 3, 10),
+('River City Ransom', 1989, '1989-04-25', 850000, 8, 1),
+('Blaster Master', 1988, '1988-11-14', 1200000, 10, 1),
+('Ghosts \'n Goblins', 1985, '1985-09-19', 1100000, 2, 1),
+('Teenage Mutant Ninja Turtles', 1989, '1989-05-12', 4000000, 3, 5),
+('R.C. Pro-Am', 1988, '1988-04-01', 2000000, 11, 6),
+('Tetris', 1989, '1989-11-15', 4300000, 1, 11),
+('Dr. Mario', 1990, '1990-07-27', 2100000, 1, 11),
+('Rygar', 1986, '1986-04-17', 1000000, 6, 1),
+('Bomberman', 1983, '1983-12-20', 2000000, 12, 12),
+('Adventure Island', 1986, '1986-09-12', 1500000, 12, 3),
+('Zelda II: The Adventure of Link', 1987, '1987-01-14', 4500000, 1, 13),
+('Super Mario Bros. 3', 1988, '1988-10-23', 18000000, 1, 3);
+
+INSERT INTO Jogo_Genero (id_jogo, id_genero) VALUES
+(1, 3), (2, 2), (3, 4), (4, 1), (5, 5), 
+(6, 2), (7, 2), (8, 1), (9, 1), (10, 6);
+
+INSERT INTO Jogo_Console (id_jogo, id_console) VALUES 
+(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), 
+(6, 1), (7, 1), (8, 1), (9, 1), (10, 1);
