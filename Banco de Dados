@@ -306,3 +306,29 @@ FROM Jogo
 INNER JOIN Console ON id_jogo = Console.id_console;
 
 SELECT * FROM JogosDetalhadosPorConsole;
+
+######################### CONSULTAS #########################
+-- Consultar jogos de um desenvolvedor específico
+CALL GetJogosPorDesenvolvedor(1);
+
+-- Consultar o total de vendas de um desenvolvedor
+SELECT * FROM TotalVendasPorDesenvolvedor;
+
+-- Consultar o jogo mais vendido
+SELECT * FROM JogoMaisVendido;
+
+-- Consultar o número de jogos de um gênero específico
+SELECT * FROM JogosPorGenero;
+
+-- Consultar todos os jogos ordenados por número de vendas
+SELECT nome, numero_vendas FROM Jogo ORDER BY numero_vendas DESC;
+
+-- Consultar todos os jogos de um determinado ano
+SELECT nome, ano_lancamento FROM Jogo WHERE ano_lancamento = 1985;
+
+-- Consultar desenvolvedores com menos de 15 jogos
+SELECT d.nome, COUNT(*) AS num_jogos
+FROM Jogo j
+JOIN Desenvolvedor d ON j.id_desenvolvedor = d.id_desenvolvedor
+GROUP BY d.nome
+HAVING COUNT(*) < 15;
