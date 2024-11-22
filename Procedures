@@ -1,0 +1,33 @@
+
+
+DELIMITER $$
+
+
+CREATE PROCEDURE GetJogosPorDesenvolvedor(IN dev_id INT)
+BEGIN
+    SELECT nome, ano_lancamento, numero_vendas 
+    FROM Jogo
+    WHERE id_desenvolvedor = dev_id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE AtualizarVendasJogo(IN jogo_nome VARCHAR(100), IN novas_vendas INT)
+BEGIN
+    UPDATE Jogo 
+    SET numero_vendas = novas_vendas 
+    WHERE nome = jogo_nome;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE DeletarJogo(IN jogo_nome VARCHAR(100))
+BEGIN
+    DELETE FROM Jogo WHERE nome = jogo_nome;
+END$$
+
+
+DELIMITER ;
+
